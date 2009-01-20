@@ -8,7 +8,6 @@ Group:		Applications/System
 Source0:	%{name}.conf
 Source1:	%{name}-multilib.conf
 URL:		http://poldek.pld-linux.org/
-BuildRequires:	sed
 Requires:	poldek
 Provides:	poldek-source-main
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
@@ -65,7 +64,10 @@ sed '
 ' < %{SOURCE1} > $RPM_BUILD_ROOT%{_sysconfdir}/mirror-%{mirror}-multilib.conf
 %endif
 
-%files 
+%clean
+rm -rf $RPM_BUILD_ROOT
+
+%files
 %defattr(644,root,root,755)
 %config(noreplace) %verify(not md5 mtime size) %{_sysconfdir}/mirror-%{mirror}.conf
 
